@@ -3,7 +3,8 @@ export type Bloco =
   | { tipo: "subsecao"; texto: string }
   | { tipo: "paragrafo"; texto: string }
   | { tipo: "lista"; itens: string[] }
-  | { tipo: "nota"; titulo?: string; texto: string }\n  | { tipo: "exercicio"; titulo: string; enunciado: string; itens: string[] };
+  | { tipo: "nota"; titulo?: string; texto: string }
+  | { tipo: "exercicio"; titulo: string; enunciado: string; itens: string[] };
 
 export type Aula = {
   numero: number;
@@ -64,7 +65,8 @@ export const aulas: Aula[] = [
       },
       {
         tipo: "nota",
-        titulo: "Nota 1 · Xingu, a Terra Mágica",\n        texto: "O aclamado documentário \\"Xingu, a Terra Mágica\\" foi uma série de dez a onze programas dirigida pelo jornalista e documentarista Washington Novaes, exibida originalmente pela extinta Rede Manchete em 1985. A obra marcou a televisão brasileira ao revelar o cotidiano, os mitos, os rituais e a organização social de povos indígenas do Parque Indígena do Xingu.",
+        titulo: "Nota 1 · Xingu, a Terra Mágica",
+        texto: "O aclamado documentário \\"Xingu, a Terra Mágica\\" foi uma série de dez a onze programas dirigida pelo jornalista e documentarista Washington Novaes, exibida originalmente pela extinta Rede Manchete em 1985. A obra marcou a televisão brasileira ao revelar o cotidiano, os mitos, os rituais e a organização social de povos indígenas do Parque Indígena do Xingu.",
       },
       {
         tipo: "paragrafo",
@@ -95,7 +97,8 @@ export const aulas: Aula[] = [
       { tipo: "paragrafo", texto: "Trabalho da multidão que é voluntario" },
       {
         tipo: "nota",
-        titulo: "Nota 3 · Trabalho da multidão",\n        texto: "O \\"trabalho da multidão\\" (ou o trabalho do comum) é um conceito da filosofia política e sociologia (associado a autores como Toni Negri e Michael Hardt) que define a produção social realizada de forma coletiva e difusa pela sociedade, além das corporações ou empregos tradicionais",
+        titulo: "Nota 3 · Trabalho da multidão",
+        texto: "O \\"trabalho da multidão\\" (ou o trabalho do comum) é um conceito da filosofia política e sociologia (associado a autores como Toni Negri e Michael Hardt) que define a produção social realizada de forma coletiva e difusa pela sociedade, além das corporações ou empregos tradicionais",
       },
     ],
   },
