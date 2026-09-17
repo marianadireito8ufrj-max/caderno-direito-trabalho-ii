@@ -66,7 +66,7 @@ export const aulas: Aula[] = [
       {
         tipo: "nota",
         titulo: "Nota 1 · Xingu, a Terra Mágica",
-        texto: "O aclamado documentário \\"Xingu, a Terra Mágica\\" foi uma série de dez a onze programas dirigida pelo jornalista e documentarista Washington Novaes, exibida originalmente pela extinta Rede Manchete em 1985. A obra marcou a televisão brasileira ao revelar o cotidiano, os mitos, os rituais e a organização social de povos indígenas do Parque Indígena do Xingu.",
+        texto: `O aclamado documentário "Xingu, a Terra Mágica" foi uma série de dez a onze programas dirigida pelo jornalista e documentarista Washington Novaes, exibida originalmente pela extinta Rede Manchete em 1985. A obra marcou a televisão brasileira ao revelar o cotidiano, os mitos, os rituais e a organização social de povos indígenas do Parque Indígena do Xingu.`,
       },
       {
         tipo: "paragrafo",
@@ -98,7 +98,7 @@ export const aulas: Aula[] = [
       {
         tipo: "nota",
         titulo: "Nota 3 · Trabalho da multidão",
-        texto: "O \\"trabalho da multidão\\" (ou o trabalho do comum) é um conceito da filosofia política e sociologia (associado a autores como Toni Negri e Michael Hardt) que define a produção social realizada de forma coletiva e difusa pela sociedade, além das corporações ou empregos tradicionais",
+        texto: `O "trabalho da multidão" (ou o trabalho do comum) é um conceito da filosofia política e sociologia (associado a autores como Toni Negri e Michael Hardt) que define a produção social realizada de forma coletiva e difusa pela sociedade, além das corporações ou empregos tradicionais`,
       },
     ],
   },
