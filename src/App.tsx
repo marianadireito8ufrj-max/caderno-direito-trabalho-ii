@@ -52,7 +52,26 @@ function ConteudoBloco({ item }: { item: Bloco }) {
   }
 
   if (item.tipo === "nota") {
-    return <p className="source-note">{item.texto}</p>;
+    return (
+      <details className="source-note">
+        <summary>{item.titulo ?? "Nota do caderno-base"}</summary>
+        <p>{item.texto}</p>
+      </details>
+    );
+  }
+
+  if (item.tipo === "exercicio") {
+    return (
+      <section className="exercise-card">
+        <strong>{item.titulo}</strong>
+        <p>{item.enunciado}</p>
+        <ol>
+          {item.itens.map((texto, indice) => (
+            <li key={`${texto}-${indice}`}>{texto}</li>
+          ))}
+        </ol>
+      </section>
+    );
   }
 
   return <p>{item.texto}</p>;

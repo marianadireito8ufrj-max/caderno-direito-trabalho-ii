@@ -3,7 +3,7 @@ export type Bloco =
   | { tipo: "subsecao"; texto: string }
   | { tipo: "paragrafo"; texto: string }
   | { tipo: "lista"; itens: string[] }
-  | { tipo: "nota"; texto: string };
+  | { tipo: "nota"; titulo?: string; texto: string }\n  | { tipo: "exercicio"; titulo: string; enunciado: string; itens: string[] };
 
 export type Aula = {
   numero: number;
@@ -64,7 +64,7 @@ export const aulas: Aula[] = [
       },
       {
         tipo: "nota",
-        texto: "O caderno-base registra em nota que o documentário “Xingu, a Terra Mágica” foi uma série dirigida por Washington Novaes e exibida originalmente pela Rede Manchete em 1985.",
+        titulo: "Nota 1 · Xingu, a Terra Mágica",\n        texto: "O aclamado documentário \\"Xingu, a Terra Mágica\\" foi uma série de dez a onze programas dirigida pelo jornalista e documentarista Washington Novaes, exibida originalmente pela extinta Rede Manchete em 1985. A obra marcou a televisão brasileira ao revelar o cotidiano, os mitos, os rituais e a organização social de povos indígenas do Parque Indígena do Xingu.",
       },
       {
         tipo: "paragrafo",
@@ -95,7 +95,7 @@ export const aulas: Aula[] = [
       { tipo: "paragrafo", texto: "Trabalho da multidão que é voluntario" },
       {
         tipo: "nota",
-        texto: "O caderno-base registra em nota que o “trabalho da multidão” (ou trabalho do comum) é um conceito associado a autores como Toni Negri e Michael Hardt.",
+        titulo: "Nota 3 · Trabalho da multidão",\n        texto: "O \\"trabalho da multidão\\" (ou o trabalho do comum) é um conceito da filosofia política e sociologia (associado a autores como Toni Negri e Michael Hardt) que define a produção social realizada de forma coletiva e difusa pela sociedade, além das corporações ou empregos tradicionais",
       },
     ],
   },
@@ -173,6 +173,18 @@ export const aulas: Aula[] = [
       { tipo: "lista", itens: ["Parciais - 130", "Totais - 133"] },
       { tipo: "secao", texto: "2. Período concessivo" },
       { tipo: "lista", itens: ["Prazo", "Sanção", "Procedimentos concessivos"] },
+      {
+        tipo: "exercicio",
+        titulo: "Exercício · Férias de Severino",
+        enunciado: "Severino foi admitido no dia 05/05/2020 e demitido no dia 15/09/2026 e nunca recebeu nada e nem gozou nada a título de férias, quais são e quantos são os direitos de férias que ele vai pedir.",
+        itens: [
+          "A partir de 05/05/2021 começa a contar o período aquisitivo, a empresa teria até o dia 05/04/2022 para conceder (1º férias); - dobra",
+          "05/05/2023 (2ª férias) - dobra",
+          "05/05/2024 (3ª férias) - dobra",
+          "05/05/2025 (4ª férias) - dobra",
+          "05/05/2026 (5ª férias) - dobra",
+        ],
+      },
     ],
   },
   ...Array.from({ length: 10 }, (_, index) => ({
