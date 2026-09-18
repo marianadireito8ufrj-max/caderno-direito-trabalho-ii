@@ -15,7 +15,7 @@ export type Aula = {
 };
 
 // Será preenchido apenas quando a URL da fonte estiver verificada.
-export const fonteGoogleDocs = "";
+export const fonteGoogleDocs = "https://docs.google.com/document/d/1j2yeBHTP5qVTYS6JaBX8RYfOD8Rvn8H4ZhwKfqmNpq4/edit?usp=drivesdk";
 
 export const aulas: Aula[] = [
   {
