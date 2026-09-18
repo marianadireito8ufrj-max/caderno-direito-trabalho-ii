@@ -126,6 +126,15 @@ button{border-radius:0}
 .exercise-card strong{display:block;color:var(--forest);text-transform:uppercase;font-size:12px;letter-spacing:.08em;margin-bottom:10px}
 .exercise-card p{margin:0 0 12px!important;text-align:left!important}
 .exercise-card ol{margin:0;padding-left:22px;display:grid;gap:7px}
+
+.lesson-navigation{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.lesson-navigation button{border:1px solid var(--mid);background:transparent;color:var(--forest);padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;text-align:left;min-height:72px}
+.lesson-navigation button:last-child{text-align:right;justify-content:flex-end}
+.lesson-navigation button:hover:not(:disabled){background:var(--pale)}
+.lesson-navigation button:disabled{opacity:.35;cursor:not-allowed}
+.lesson-navigation span{display:grid;gap:4px;font-size:11px;font-weight:700;line-height:1.35}
+.lesson-navigation small{text-transform:uppercase;letter-spacing:.12em;font-size:8px;color:var(--muted)}
+
 .lesson-column footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--mid);margin-top:32px;padding-top:20px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--forest)}
 .lesson-column footer span:last-child{text-transform:none;letter-spacing:0;opacity:.65}
 
@@ -167,4 +176,5 @@ button{border-radius:0}
   .lesson-head{padding:22px}
   .lesson-head>svg{display:none}
   .hero::after{display:none}
+  .lesson-navigation{grid-template-columns:1fr}
 }
