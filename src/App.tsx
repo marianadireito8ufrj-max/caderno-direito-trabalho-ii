@@ -6,7 +6,6 @@ import {
   Eye,
   EyeOff,
   KeyRound,
-  Leaf,
   Mail,
   ShieldCheck,
 } from "lucide-react";
@@ -265,9 +264,9 @@ export default function App() {
       <section className="source-bar">
         <div>
           <span className="badge">
-            <Leaf size={13} /> Caderno-base
+            <BookOpen size={13} /> Caderno-base
           </span>
-          <span>Conteúdo transcrito do caderno de Direito do Trabalho II</span>
+          <span>Conteúdo conferido no Google Docs</span>
         </div>
 
         {fonteGoogleDocs ? (
