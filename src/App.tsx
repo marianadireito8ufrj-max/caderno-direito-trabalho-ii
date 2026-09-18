@@ -2,6 +2,8 @@ import { useMemo, useState } from "react";
 import {
   ArrowLeft,
   BookOpen,
+  ChevronLeft,
+  ChevronRight,
   ExternalLink,
   Eye,
   EyeOff,
@@ -77,7 +79,8 @@ function ConteudoBloco({ item }: { item: Bloco }) {
 }
 
 export default function App() {
-  const [aulaSelecionada, setAulaSelecionada] = useState(1);
+  const publicadas = aulas.filter((item) => item.publicada);
+  const [aulaSelecionada, setAulaSelecionada] = useState(publicadas[0]?.numero ?? 1);
   const [loginAberto, setLoginAberto] = useState(false);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [email, setEmail] = useState("");
@@ -85,8 +88,11 @@ export default function App() {
   const [lembrar, setLembrar] = useState(true);
   const [avisoLogin, setAvisoLogin] = useState("");
 
-  const aula = aulas.find((item) => item.numero === aulaSelecionada && item.publicada) ?? aulas[0];
+  const aula = aulas.find((item) => item.numero === aulaSelecionada && item.publicada) ?? publicadas[0];
   const secoes = useMemo(() => agruparSecoes(aula.blocos), [aula]);
+  const indicePublicada = publicadas.findIndex((item) => item.numero === aula.numero);
+  const anterior = indicePublicada > 0 ? publicadas[indicePublicada - 1] : null;
+  const proxima = indicePublicada < publicadas.length - 1 ? publicadas[indicePublicada + 1] : null;
 
   if (loginAberto) {
     return (
@@ -329,6 +335,30 @@ export default function App() {
                 </div>
               </article>
             ))}
+          </div>
+
+          <div className="lesson-navigation">
+            <button
+              disabled={!anterior}
+              onClick={() => anterior && setAulaSelecionada(anterior.numero)}
+            >
+              <ChevronLeft size={17} />
+              <span>
+                <small>Aula anterior</small>
+                {anterior?.titulo ?? "—"}
+              </span>
+            </button>
+
+            <button
+              disabled={!proxima}
+              onClick={() => proxima && setAulaSelecionada(proxima.numero)}
+            >
+              <span>
+                <small>Próxima aula</small>
+                {proxima?.titulo ?? "—"}
+              </span>
+              <ChevronRight size={17} />
+            </button>
           </div>
 
           <footer>
