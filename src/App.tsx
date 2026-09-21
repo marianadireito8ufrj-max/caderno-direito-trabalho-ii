@@ -1,19 +1,58 @@
 import { useMemo, useState } from "react";
 import {
-  ArrowLeft,
   BookOpen,
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Eye,
-  EyeOff,
-  KeyRound,
-  Mail,
+  FolderOpen,
   ShieldCheck,
 } from "lucide-react";
 import { aulas, fonteGoogleDocs, type Bloco } from "./data";
 
 type Secao = { titulo: string; itens: Bloco[] };
+
+const pastasDrive = [
+  {
+    nome: "PALESTRA CIRT - DESAFIOS CONTEMPORÂNEOS PARA O DIREITO DO TRABALHO - MESA 1 - 18h30",
+    descricao: "Materiais relacionados à palestra e às atividades acadêmicas do CIRT.",
+    url: "https://drive.google.com/drive/folders/1GU56EeakYhLWCUqFMs8MfN7xgE0ojONC",
+  },
+  {
+    nome: "Ementa/programa do curso",
+    descricao: "Ementa, programa e documentos gerais da disciplina.",
+    url: "https://drive.google.com/drive/folders/1AtOUFhqEqHPjtYJD7z4w6YWXEewiiHpB",
+  },
+  {
+    nome: "Anotações/Caderno 📝",
+    descricao: "Caderno-base, anotações e documentos de apoio da disciplina.",
+    url: "https://drive.google.com/drive/folders/1nDVIpgpZwPN89pSxnPbCVC97x08duXAc",
+  },
+  {
+    nome: "Transcrições ⏳",
+    descricao: "Transcrições das aulas, gravações e conteúdos relacionados.",
+    url: "https://drive.google.com/drive/folders/1N6O0fXY-v2eiXG6572dudMzpmYaN2a1f",
+  },
+  {
+    nome: "Caderno Digital 📝",
+    descricao: "Pasta destinada aos materiais relacionados ao Caderno Digital.",
+    url: "https://drive.google.com/drive/folders/1T-Nz6SFBorEr7RZ2DKdukUesPLRzBIaf",
+  },
+  {
+    nome: "Doutrinas e material complementar_",
+    descricao: "Doutrinas, artigos, textos e materiais acadêmicos complementares.",
+    url: "https://drive.google.com/drive/folders/19tXUB9jC0Fs6h9LKnuU-RZr3dkZGbFzp",
+  },
+  {
+    nome: "Gravações 🎤",
+    descricao: "Gravações de aulas e outros registros em áudio.",
+    url: "https://drive.google.com/drive/folders/1WZpu4dcK8Ovn1fwVHkO5nS0vcxQyDSBC",
+  },
+  {
+    nome: "Provas antigas e listas de exercícios 🧾",
+    descricao: "Provas anteriores, exercícios e materiais para revisão.",
+    url: "https://drive.google.com/drive/folders/1Vk7uy3XQbdIDaQF8PJvRFtcjn2NbavHC",
+  },
+];
 
 function agruparSecoes(blocos: Bloco[]): Secao[] {
   const secoes: Secao[] = [];
@@ -81,12 +120,6 @@ function ConteudoBloco({ item }: { item: Bloco }) {
 export default function App() {
   const publicadas = aulas.filter((item) => item.publicada);
   const [aulaSelecionada, setAulaSelecionada] = useState(publicadas[0]?.numero ?? 1);
-  const [loginAberto, setLoginAberto] = useState(false);
-  const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [lembrar, setLembrar] = useState(true);
-  const [avisoLogin, setAvisoLogin] = useState("");
 
   const aula = aulas.find((item) => item.numero === aulaSelecionada && item.publicada) ?? publicadas[0];
   const secoes = useMemo(() => agruparSecoes(aula.blocos), [aula]);
@@ -94,148 +127,14 @@ export default function App() {
   const anterior = indicePublicada > 0 ? publicadas[indicePublicada - 1] : null;
   const proxima = indicePublicada < publicadas.length - 1 ? publicadas[indicePublicada + 1] : null;
 
-  if (loginAberto) {
-    return (
-      <main className="login-page">
-        <section className="login-brand">
-          <div className="login-brand-top">
-            <strong>Faculdade Nacional de Direito</strong>
-            <span>FND · UFRJ · 8º período · 2026.2</span>
-          </div>
-
-          <div className="login-brand-main">
-            <p>Caderno digital · Caderno 08</p>
-            <h1>
-              Direito do <span>Trabalho II</span>
-            </h1>
-            <p className="login-brand-copy">
-              Caderno digital da disciplina, com conteúdo organizado a partir do caderno-base.
-            </p>
-          </div>
-
-          <div className="login-brand-footer">
-            <span>
-              <ShieldCheck size={16} /> Ambiente acadêmico
-            </span>
-            <span>FND · UFRJ</span>
-          </div>
-        </section>
-
-        <section className="login-access">
-          <div className="login-geometry" aria-hidden="true" />
-          <section className="login-card">
-            <p className="login-eyebrow">Direito do Trabalho II</p>
-            <h2>Acesse o caderno</h2>
-            <p className="login-copy">
-              Entre com sua conta para acessar e sincronizar o conteúdo da disciplina.
-            </p>
-            <div className="login-rule" />
-
-            <form
-              onSubmit={(event) => {
-                event.preventDefault();
-                setAvisoLogin("A autenticação real será conectada em uma etapa futura.");
-              }}
-            >
-              <label>
-                E-mail
-                <div className="input-with-icon">
-                  <Mail size={18} />
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    placeholder="seuemail@ufrj.br"
-                  />
-                </div>
-              </label>
-
-              <label>
-                Senha
-                <div className="input-with-icon password-field">
-                  <KeyRound size={18} />
-                  <input
-                    type={mostrarSenha ? "text" : "password"}
-                    required
-                    value={senha}
-                    onChange={(event) => setSenha(event.target.value)}
-                    placeholder="Digite sua senha"
-                  />
-                  <button
-                    type="button"
-                    className="password-toggle"
-                    onClick={() => setMostrarSenha((valor) => !valor)}
-                    aria-label={mostrarSenha ? "Ocultar senha" : "Mostrar senha"}
-                  >
-                    {mostrarSenha ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </label>
-
-              <div className="login-row">
-                <label className="remember">
-                  <input
-                    type="checkbox"
-                    checked={lembrar}
-                    onChange={(event) => setLembrar(event.target.checked)}
-                  />
-                  Continuar conectado
-                </label>
-                <button className="text-link" type="button">
-                  Esqueci minha senha
-                </button>
-              </div>
-
-              {avisoLogin && <p className="login-note">{avisoLogin}</p>}
-
-              <button className="login-primary" type="submit">
-                <KeyRound size={18} /> Entrar no caderno
-              </button>
-            </form>
-
-            <div className="login-divider">
-              <span>ou</span>
-            </div>
-
-            <button
-              className="guest-button"
-              type="button"
-              onClick={() => {
-                setLoginAberto(false);
-                setAvisoLogin("");
-              }}
-            >
-              <BookOpen size={18} /> Entrar sem login · somente leitura
-            </button>
-
-            <p className="guest-note">
-              Acesso sem login disponível apenas para leitura. Edição e integrações poderão ser
-              adicionadas futuramente.
-            </p>
-
-            <div className="login-bottom-links">
-              <button type="button">Esqueci meu e-mail</button>
-              <span>·</span>
-              <button type="button">Cadastre-se</button>
-            </div>
-
-            <p className="privacy-note">
-              Nesta versão, o formulário é apenas visual e não envia dados de autenticação.
-            </p>
-          </section>
-        </section>
-      </main>
-    );
-  }
-
   return (
     <div className="app-shell">
       <header className="hero">
         <div className="hero-top">
-          <button className="account-link" onClick={() => setLoginAberto(true)}>
-            <ArrowLeft size={19} /> <span>Entrar na conta</span>
-          </button>
+          <div className="public-access" aria-label="Acesso público somente leitura">
+            <ShieldCheck size={18} />
+            <span>Acesso público · somente leitura</span>
+          </div>
 
           <div className="institution">
             <strong>Faculdade Nacional de Direito</strong>
@@ -245,7 +144,7 @@ export default function App() {
 
         <div className="hero-main">
           <div className="hero-copy">
-            <p className="eyebrow light">Caderno digital · Caderno 08</p>
+            <p className="eyebrow light">Caderno digital</p>
             <h1>
               Direito do <span>Trabalho II</span>
             </h1>
@@ -284,6 +183,45 @@ export default function App() {
             <ExternalLink size={16} /> Abrir fonte
           </button>
         )}
+      </section>
+
+      <section className="drive-library" aria-labelledby="drive-library-title">
+        <div className="drive-library-head">
+          <div>
+            <p className="eyebrow">Biblioteca da disciplina</p>
+            <h2 id="drive-library-title">Materiais no Google Drive</h2>
+            <p>Acesso direto às pastas permanentes da disciplina.</p>
+          </div>
+          <span className="drive-readonly">
+            <ShieldCheck size={14} /> Somente leitura
+          </span>
+        </div>
+
+        <div className="drive-grid">
+          {pastasDrive.map((pasta) => (
+            <a
+              className="drive-card"
+              href={pasta.url}
+              target="_blank"
+              rel="noreferrer"
+              key={pasta.url}
+            >
+              <div className="drive-card-top">
+                <span>
+                  <FolderOpen size={18} /> Google Drive
+                </span>
+                <ExternalLink size={16} aria-hidden="true" />
+              </div>
+              <strong>{pasta.nome}</strong>
+              <p>{pasta.descricao}</p>
+            </a>
+          ))}
+        </div>
+
+        <p className="drive-security-note">
+          Esta integração apenas abre as pastas existentes. O caderno não cria, move, renomeia,
+          substitui ou exclui arquivos e pastas do Google Drive.
+        </p>
       </section>
 
       <main className="content-grid">
@@ -362,8 +300,7 @@ export default function App() {
           </div>
 
           <footer>
-            <span>Direito do Trabalho II · Caderno 08</span>
-            <span>Transcrito, organizado e diagramado por Mariana Monteiro</span>
+            <span>Desenvolvido e Organizado por Mariana Monteiro</span>
           </footer>
         </section>
       </main>
