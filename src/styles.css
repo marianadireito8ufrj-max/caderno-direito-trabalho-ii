@@ -22,56 +22,13 @@ button,input{font:inherit}
 button{border-radius:0}
 .app-shell{min-height:100vh}
 
-.login-page{min-height:100vh;display:grid;grid-template-columns:54.5% 45.5%;background:var(--cream);position:relative;overflow:hidden}
-.login-brand{background:linear-gradient(155deg,#24483C 0%,#315F50 100%);color:var(--paper);padding:48px 5.6vw 40px;display:grid;grid-template-rows:auto 1fr auto;min-height:100vh}
-.login-brand-top{display:flex;justify-content:space-between;gap:24px;padding-bottom:22px;border-bottom:1px solid rgba(252,253,248,.28);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
-.login-brand-top strong{font-weight:800}
-.login-brand-top span{font-weight:700;opacity:.86;text-align:right}
-.login-brand-main{align-self:center;transform:translateY(18px)}
-.login-brand-main>p:first-child{margin:0 0 22px;font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(252,253,248,.76)}
-.login-brand-main h1{margin:0;text-transform:uppercase;font-size:clamp(60px,5.6vw,106px);line-height:.88;letter-spacing:-.055em;font-weight:800;max-width:760px}
-.login-brand-main h1 span{display:block;text-transform:none;font-size:.7em;font-weight:300;letter-spacing:-.045em;line-height:1;margin-top:8px}
-.login-brand-copy{max-width:720px;margin:34px 0 0;font-size:17px;line-height:1.65;color:rgba(252,253,248,.82)}
-.login-brand-footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(252,253,248,.28);padding-top:18px;font-size:10px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
-.login-brand-footer span:first-child{display:inline-flex;align-items:center;gap:8px}
-.login-access{position:relative;display:grid;place-items:center;padding:40px 4vw;background:var(--cream);min-height:100vh;overflow:hidden}
-.login-geometry{position:absolute;right:0;bottom:0;width:10.5vw;height:44vh;background:#E6ECE8;clip-path:polygon(100% 0,100% 100%,0 100%);opacity:.95;pointer-events:none}
-.login-card{position:relative;z-index:1;width:min(560px,88%);background:rgba(252,253,248,.97);border:1px solid #CFDAD4;padding:36px 40px 32px;box-shadow:0 22px 58px rgba(47,90,75,.12)}
-.login-eyebrow{margin:0;color:var(--forest);font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
-.login-card h2{margin:18px 0 8px;font-size:clamp(38px,3vw,54px);line-height:1;font-weight:300;letter-spacing:-.04em;color:#1F2925}
-.login-copy{margin:0;color:#657169;font-size:14px;line-height:1.65;max-width:430px}
-.login-rule{height:1px;background:#D8DED3;margin:26px 0}
-.login-card form{display:grid;gap:16px}
-.login-card form>label{display:grid;gap:8px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#18241F}
-.input-with-icon{height:49px;display:flex;align-items:center;gap:11px;border:1px solid #BFC8BC;background:#fff;padding:0 13px;color:var(--forest)}
-.input-with-icon:focus-within{border-color:var(--forest)}
-.input-with-icon input{width:100%;height:100%;border:0;outline:0;background:transparent;color:#24332C;font-size:14px}
-.input-with-icon input::placeholder{color:#9DA49F}
-.password-field{position:relative}
-.password-toggle{border:0;background:transparent;color:var(--forest);cursor:pointer;display:grid;place-items:center;padding:5px}
-.login-row{display:flex;justify-content:space-between;align-items:center;gap:18px}
-.remember{display:flex;align-items:center;gap:8px;font-size:11px;color:#53615A;text-transform:none!important;letter-spacing:0!important;font-weight:500!important}
-.remember input{accent-color:var(--forest)}
-.text-link,.login-bottom-links button{border:0;background:transparent;color:var(--forest);font-size:10px;font-weight:800;padding:0;cursor:pointer}
-.login-primary,.guest-button{width:100%;min-height:50px;display:inline-flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;font-weight:800}
-.login-primary{border:0;background:var(--forest);color:#fff;font-size:15px}
-.login-note{margin:0;background:var(--pale);border-left:3px solid var(--mid);padding:10px 12px;font-size:11px;line-height:1.45;color:#46564D}
-.login-divider{display:flex;align-items:center;gap:12px;margin:20px 0 17px}
-.login-divider::before,.login-divider::after{content:"";height:1px;background:#D7DED3;flex:1}
-.login-divider span{font-size:10px;text-transform:uppercase;color:#929A94}
-.guest-button{background:transparent;border:1px solid var(--forest);color:var(--forest);font-size:11px}
-.guest-note{text-align:center;margin:10px auto 20px;max-width:430px;font-size:9px;line-height:1.5;color:#8A938D}
-.login-bottom-links{border-top:1px solid #D7DED3;padding-top:18px;display:flex;align-items:center;justify-content:center;gap:12px}
-.login-bottom-links span{color:#87918A}
-.privacy-note{text-align:center;margin:22px 0 0;font-size:9px;line-height:1.5;color:#9A9F9C}
-
 .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#EDF5F1 0%,#DDEBE4 58%,#D2E4DB 100%);color:var(--forest);border-bottom:6px solid var(--green);height:510px;min-height:510px}
 .hero::after{content:"";position:absolute;z-index:0;top:0;right:8%;width:112px;height:100%;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 13px,rgba(62,116,97,.16) 13px 15px,transparent 15px 18px)}
-.hero-top,.hero-main,.source-bar,.content-grid{width:min(1838px,calc(100% - 72px));margin:auto}
+.hero-top,.hero-main,.source-bar,.drive-library,.content-grid{width:min(1838px,calc(100% - 72px));margin:auto}
 .hero-top,.hero-main{position:relative;z-index:1}
 .hero-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(36,72,60,.20);padding:20px 0 19px}
-.account-link{display:inline-flex;align-items:center;gap:11px;color:var(--forest);border:0;background:transparent;text-transform:uppercase;font-size:17px;letter-spacing:.16em;font-weight:600;cursor:pointer;padding:0}
-.account-link span{opacity:.96}
+.public-access{display:inline-flex;align-items:center;gap:10px;color:var(--forest);font-size:12px;letter-spacing:.12em;font-weight:700;text-transform:uppercase}
+.public-access svg{color:var(--green)}
 .institution{display:grid;gap:5px;text-align:right;text-transform:uppercase;font-size:12px;letter-spacing:.14em;position:relative;z-index:2;padding-left:28px;background:#DCEAE3;color:var(--forest)}
 .institution span{opacity:.78}
 .hero-main{height:416px;padding:43px 0 62px;display:grid;grid-template-columns:minmax(0,1fr) 456px;gap:64px;align-items:end}
@@ -87,11 +44,29 @@ button{border-radius:0}
 .meta-box span,.meta-box strong{display:block}
 .meta-box span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:700}
 .meta-box strong{font-size:15px;margin-top:9px;white-space:nowrap}
+
 .source-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:16px 0}
 .source-bar>div{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--forest)}
 .badge{display:inline-flex;align-items:center;gap:6px;background:var(--forest);color:var(--paper);padding:6px 9px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .secondary{border:1px solid var(--forest);color:var(--forest);background:transparent;padding:9px 12px;font-size:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.secondary:hover{background:var(--pale)}
 .disabled-source{opacity:.45;cursor:not-allowed}
+
+.drive-library{padding:18px 0 34px}
+.drive-library-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;border-top:1px solid var(--divider);padding-top:28px}
+.drive-library-head .eyebrow{margin:0 0 10px;font-size:10px}
+.drive-library-head h2{margin:0;color:var(--forest);font-size:clamp(28px,3vw,42px);letter-spacing:-.035em;text-transform:uppercase}
+.drive-library-head p:last-child{margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.55}
+.drive-readonly{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;border:1px solid var(--divider);background:var(--pale);color:var(--forest);padding:8px 10px;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.drive-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.drive-card{display:flex;flex-direction:column;min-height:190px;border:1px solid var(--divider);background:var(--paper);padding:20px;text-decoration:none;color:var(--forest);transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease}
+.drive-card:hover{transform:translateY(-2px);border-color:var(--mid);box-shadow:0 12px 28px rgba(36,72,60,.08)}
+.drive-card-top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;color:var(--green)}
+.drive-card-top span{display:inline-flex;align-items:center;gap:8px;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.drive-card>strong{font-size:15px;line-height:1.45}
+.drive-card>p{margin:10px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
+.drive-security-note{margin:16px 0 0;border-left:3px solid var(--mid);background:var(--pale);padding:12px 14px;color:#526B61;font-size:11px;line-height:1.6}
+
 .content-grid{display:grid;grid-template-columns:270px 1fr;gap:34px;padding:34px 0 50px}
 .toc{position:sticky;top:20px;border:1px solid var(--mid);background:var(--paper)}
 .toc-title{background:var(--forest);color:var(--paper);padding:18px}
@@ -135,22 +110,17 @@ button{border-radius:0}
 .lesson-navigation span{display:grid;gap:4px;font-size:11px;font-weight:700;line-height:1.35}
 .lesson-navigation small{text-transform:uppercase;letter-spacing:.12em;font-size:8px;color:var(--muted)}
 
-.lesson-column footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid var(--mid);margin-top:32px;padding-top:20px;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--forest)}
-.lesson-column footer span:last-child{text-transform:none;letter-spacing:0;opacity:.65}
+.lesson-column footer{display:flex;justify-content:flex-end;gap:20px;border-top:1px solid var(--mid);margin-top:32px;padding-top:20px;font-size:10px;letter-spacing:0;color:var(--forest);text-align:right}
+.lesson-column footer span{opacity:.72}
 
 @media(max-width:980px){
-  .login-page{grid-template-columns:1fr}
-  .login-brand{min-height:42vh;padding:30px 34px}
-  .login-brand-main{transform:none;padding:55px 0}
-  .login-brand-main h1{font-size:clamp(48px,10vw,78px)}
-  .login-access{min-height:auto;padding:42px 22px 70px}
-  .login-card{width:min(560px,100%)}
-  .login-geometry{width:22vw;height:28vh}
   .hero{height:auto;min-height:510px}
   .hero-main,.content-grid{grid-template-columns:1fr}
   .hero-side{display:block}
   .meta-box{width:100%}
   .source-bar{align-items:flex-start;flex-direction:column}
+  .drive-library-head{align-items:flex-start}
+  .drive-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .toc{position:static}
   .content-grid{padding-top:18px}
   .hero-main{height:auto;padding-top:34px}
@@ -158,23 +128,22 @@ button{border-radius:0}
   .institution{max-width:55%;padding-left:12px}
   .hero::after{right:2%;opacity:.45}
 }
+
 @media(max-width:560px){
-  .login-brand{padding:24px 22px}
-  .login-brand-top{font-size:8px}
-  .login-brand-footer{font-size:8px}
-  .login-access{padding:28px 14px 58px}
-  .login-card{padding:28px 22px}
-  .login-row{align-items:flex-start;flex-direction:column}
-  .login-card h2{font-size:36px}
-  .hero-top,.hero-main,.source-bar,.content-grid{width:min(100% - 28px,1180px)}
-  .account-link{font-size:11px;letter-spacing:.1em}
+  .hero-top,.hero-main,.source-bar,.drive-library,.content-grid{width:min(100% - 28px,1180px)}
+  .hero-top{gap:16px}
+  .public-access{font-size:9px;letter-spacing:.08em;max-width:48%}
   .institution{font-size:8px}
   .meta-box{grid-template-columns:1fr}
-  .meta-box>div+div{border-left:0;border-top:1px solid rgba(252,253,248,.34)}
+  .meta-box>div+div{border-left:0;border-top:1px solid rgba(62,116,97,.24)}
+  .drive-library-head{flex-direction:column;gap:14px}
+  .drive-grid{grid-template-columns:1fr}
+  .drive-card{min-height:0}
   .sections article{grid-template-columns:1fr}
   .number{margin-bottom:4px}
   .lesson-head{padding:22px}
   .lesson-head>svg{display:none}
   .hero::after{display:none}
   .lesson-navigation{grid-template-columns:1fr}
+  .lesson-column footer{justify-content:flex-end;text-align:right}
 }
