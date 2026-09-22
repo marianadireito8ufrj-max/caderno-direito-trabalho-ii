@@ -1,13 +1,16 @@
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   BookOpen,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
   ExternalLink,
   FolderOpen,
+  RefreshCw,
   ShieldCheck,
 } from "lucide-react";
 import { aulas, fonteGoogleDocs, type Bloco } from "./data";
+import { sincronizarGoogleDocs } from "./googleDocsSync";
 
 type Secao = { titulo: string; itens: Bloco[] };
 
@@ -105,11 +108,13 @@ function ConteudoBloco({ item }: { item: Bloco }) {
       <section className="exercise-card">
         <strong>{item.titulo}</strong>
         <p>{item.enunciado}</p>
-        <ol>
-          {item.itens.map((texto, indice) => (
-            <li key={`${texto}-${indice}`}>{texto}</li>
-          ))}
-        </ol>
+        {item.itens.length > 0 && (
+          <ol>
+            {item.itens.map((texto, indice) => (
+              <li key={`${texto}-${indice}`}>{texto}</li>
+            ))}
+          </ol>
+        )}
       </section>
     );
   }
@@ -117,11 +122,56 @@ function ConteudoBloco({ item }: { item: Bloco }) {
   return <p>{item.texto}</p>;
 }
 
-export default function App() {
-  const publicadas = aulas.filter((item) => item.publicada);
-  const [aulaSelecionada, setAulaSelecionada] = useState(publicadas[0]?.numero ?? 1);
+function horarioSincronizacao(valor: string | null) {
+  if (!valor) return "";
+  const data = new Date(valor);
+  if (Number.isNaN(data.getTime())) return "";
+  return data.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+}
 
-  const aula = aulas.find((item) => item.numero === aulaSelecionada && item.publicada) ?? publicadas[0];
+export default function App() {
+  const [aulasAtuais, setAulasAtuais] = useState(aulas);
+  const publicadas = aulasAtuais.filter((item) => item.publicada);
+  const [aulaSelecionada, setAulaSelecionada] = useState(
+    aulas.find((item) => item.publicada)?.numero ?? 1,
+  );
+  const [sincronizando, setSincronizando] = useState(false);
+  const [ultimaSincronizacao, setUltimaSincronizacao] = useState<string | null>(null);
+  const [erroSincronizacao, setErroSincronizacao] = useState("");
+
+  const atualizarPeloGoogleDocs = useCallback(async (silenciosa = false) => {
+    if (!silenciosa) setSincronizando(true);
+
+    try {
+      const resultado = await sincronizarGoogleDocs(aulas);
+      setAulasAtuais(resultado.aulas);
+      setUltimaSincronizacao(resultado.fetchedAt);
+      setErroSincronizacao("");
+    } catch (erro) {
+      setErroSincronizacao(
+        erro instanceof Error
+          ? erro.message
+          : "Não foi possível atualizar pelo Google Docs neste momento.",
+      );
+    } finally {
+      if (!silenciosa) setSincronizando(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void atualizarPeloGoogleDocs(true);
+
+    const intervalo = window.setInterval(() => {
+      void atualizarPeloGoogleDocs(true);
+    }, 60_000);
+
+    return () => window.clearInterval(intervalo);
+  }, [atualizarPeloGoogleDocs]);
+
+  const aula =
+    aulasAtuais.find((item) => item.numero === aulaSelecionada && item.publicada) ??
+    publicadas[0] ??
+    aulas.find((item) => item.publicada)!;
   const secoes = useMemo(() => agruparSecoes(aula.blocos), [aula]);
   const indicePublicada = publicadas.findIndex((item) => item.numero === aula.numero);
   const anterior = indicePublicada > 0 ? publicadas[indicePublicada - 1] : null;
@@ -167,22 +217,40 @@ export default function App() {
       </header>
 
       <section className="source-bar">
-        <div>
+        <div className="source-info">
           <span className="badge">
             <BookOpen size={13} /> Caderno-base
           </span>
-          <span>Conteúdo conferido no Google Docs</span>
+          <span>Conteúdo sincronizado com o Google Docs</span>
+          <span className={erroSincronizacao ? "sync-status sync-error" : "sync-status"} aria-live="polite">
+            {erroSincronizacao ? (
+              <>Cópia segura ativa · sincronização temporariamente indisponível</>
+            ) : ultimaSincronizacao ? (
+              <>
+                <CheckCircle2 size={13} /> Atualizado às {horarioSincronizacao(ultimaSincronizacao)}
+              </>
+            ) : (
+              <>Sincronização automática ativa</>
+            )}
+          </span>
         </div>
 
-        {fonteGoogleDocs ? (
+        <div className="source-actions">
+          <button
+            className="sync-button"
+            type="button"
+            disabled={sincronizando}
+            onClick={() => void atualizarPeloGoogleDocs(false)}
+            title={erroSincronizacao || "Buscar agora a versão mais recente do Google Docs"}
+          >
+            <RefreshCw className={sincronizando ? "spin" : ""} size={16} />
+            {sincronizando ? "Atualizando..." : "Atualizar pelo Google Docs"}
+          </button>
+
           <a className="secondary" href={fonteGoogleDocs} target="_blank" rel="noreferrer">
             <ExternalLink size={16} /> Abrir fonte
           </a>
-        ) : (
-          <button className="secondary disabled-source" type="button" disabled>
-            <ExternalLink size={16} /> Abrir fonte
-          </button>
-        )}
+        </div>
       </section>
 
       <section className="drive-library" aria-labelledby="drive-library-title">
@@ -232,7 +300,7 @@ export default function App() {
               <strong>Aulas</strong>
             </div>
             <nav>
-              {aulas.map((item) => (
+              {aulasAtuais.map((item) => (
                 <button
                   key={item.numero}
                   disabled={!item.publicada}
