@@ -130,12 +130,16 @@ button{border-radius:0}
 }
 
 @media(max-width:560px){
+  .hero{height:auto;min-height:0}
+  .hero-main{height:auto;min-height:0;padding:28px 0 32px;gap:24px;align-items:start}
+  .hero-side{display:flex;width:100%;align-self:auto;justify-content:flex-start}
   .hero-top,.hero-main,.source-bar,.drive-library,.content-grid{width:min(100% - 28px,1180px)}
   .hero-top{gap:16px}
   .public-access{font-size:9px;letter-spacing:.08em;max-width:48%}
   .institution{font-size:8px}
-  .meta-box{grid-template-columns:1fr}
-  .meta-box>div+div{border-left:0;border-top:1px solid rgba(62,116,97,.24)}
+  .meta-box{width:100%;grid-template-columns:minmax(0,1fr) 120px}
+  .meta-box>div{padding:15px 14px}.meta-box strong{font-size:12px;overflow-wrap:anywhere;white-space:normal}
+  .meta-box>div+div{border-left:1px solid rgba(62,116,97,.24);border-top:0}
   .drive-library-head{flex-direction:column;gap:14px}
   .drive-grid{grid-template-columns:1fr}
   .drive-card{min-height:0}
