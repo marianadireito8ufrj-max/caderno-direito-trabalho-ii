@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const exportUrl = `https://docs.google.com/document/d/${DOC_ID}/export?format=html`;
+    const exportUrl = `https://docs.google.com/document/d/${DOC_ID}/export?format=html&cacheBust=${Date.now()}`;
     const response = await fetch(exportUrl, {
       method: "GET",
       redirect: "follow",
@@ -32,7 +32,9 @@ export default async function handler(req, res) {
       });
     }
 
-    res.setHeader("Cache-Control", "no-store, max-age=0");
+    res.setHeader("Cache-Control", "no-store, no-cache, max-age=0, must-revalidate");
+    res.setHeader("Pragma", "no-cache");
+    res.setHeader("Expires", "0");
     return res.status(200).json({
       html,
       fetchedAt: new Date().toISOString(),
