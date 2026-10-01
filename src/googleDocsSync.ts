@@ -18,7 +18,7 @@ function limparTexto(texto: string) {
 }
 
 function temDataPreenchida(meta: string) {
-  return /Data:\s*\d{1,2}\s*\/\s*\d{1,2}\s*\/\s*\d{4}/i.test(meta);
+  return /\bData\s*:?\s*\d{1,2}\s*\/\s*\d{1,2}\s*\/\s*\d{4}/i.test(meta);
 }
 
 function tipoDoElemento(elemento: Element) {
@@ -145,7 +145,10 @@ export function interpretarGoogleDocs(html: string, fallback: Aula[]): Aula[] {
     const indiceMeta = trecho.findIndex((elemento, indice) => {
       if (indiceTitulo >= 0 && indice <= indiceTitulo) return false;
       const texto = limparTexto(elemento.textContent ?? "");
-      return /Prof\.?º?\s+Ivan\s+Simões/i.test(texto) && /Data:/i.test(texto);
+      return (
+        /Prof\.?º?\s+Ivan\s+Simões/i.test(texto) &&
+        /\bData\s*:?\s*\d{1,2}\s*\/\s*\d{1,2}\s*\/\s*\d{4}/i.test(texto)
+      );
     });
 
     const meta = indiceMeta >= 0 ? limparTexto(trecho[indiceMeta].textContent ?? "") : "";
@@ -196,7 +199,7 @@ export function interpretarGoogleDocs(html: string, fallback: Aula[]): Aula[] {
 }
 
 export async function sincronizarGoogleDocs(fallback: Aula[]): Promise<ResultadoSincronizacao> {
-  const response = await fetch("/api/google-docs", {
+  const response = await fetch(`/api/google-docs?t=${Date.now()}`, {
     method: "GET",
     cache: "no-store",
     headers: { Accept: "application/json" },
